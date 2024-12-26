@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>test</title>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/fabric@latest/dist/index.min.js"></script>
+        <canvas id="can" height="500" width="500" style="border: 2px solid rgb(208, 202, 202);"></canvas>
+        <button id="Add Rectangle" onclick="rect"></button>
+        <script>
+            const canvas=new fabric.Canvas("can");
+            document.getElementById('Add Rectangle').addEventListener('click',() => {  
+            const rect=new fabric.Rect({
+                top:20,
+                left:30,
+                height:50,
+                width:100,
+                fill:'red'
+            });
+            });
+            document.getElementById('Add Circle').addEventListener('click',() => {
+                const circle=new fabric.Circle({
+                    top:50,
+                    left:70,
+                    radius:20,
+                    fill:'green'
+                });
+            });
+        canvas.add(rect,circle);
+        </script>
+    </body>
+</html>
