@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Color picker</title>
+        <script src="https://cdn.jsdelivr.net/npm/fabric@latest/dist/fabric.min.js"></script>
+    </head>
+    <body>
+        <center><canvas id="can" height="500" width="800" style="border: 2px solid black;"></canvas></center>
+        <div>
+            <label>Select Object:
+                <select id="obj-select">
+                    <option value="rect">Rectangle</option>
+                    <option value="cir">Circle</option>
+                    <option value="text">Text</option>
+                </select>
+            </label>
+            <label>Color: <input type="color" id="color-picker"></label>
+            <label>Opacity: <input type="range" id="opacity-picker"></label>
+        </div>
+        <script>
+            const canvas=new fabric.Canvas("can");
+            //rectangle
+            const rect = new fabric.Rect({
+                top: 50,
+                left: 50,
+                height: 150,
+                width: 200,
+                fill: 'red',
+                opacity: 1,
+            });
+            canvas.add(rect);
+            //circle
+            const cir = new fabric.Circle({
+                top: 50,
+                left: 300,
+                radius: 100,
+                fill: 'blue',
+            });
+            canvas.add(cir);
+            //text
+            const text=new fabric.Text("Hello",{
+                top:360,
+                left: 200,
+                fill:'green'
+            });
+            canvas.add(text);
+
+            const ObjSelect=document.getElementById("obj-select");
+            const ColorPicker=document.getElementById("color-picker");
+            const OpacityPicker=document.getElementById("opacity-picker");
+
+            function updateProps(){
+                const selectObject=ObjSelect.value === 'rect' ? rect :
+                ObjSelect.value === 'cir' ? cir : text;
+
+                selectObject.set({
+                    fill: ColorPicker.value,
+                    opacity: OpacityPicker.value,
+                });
+                canvas.renderAll();
+            }
+
+            //attach event listeners
+            ColorPicker.addEventListener('input',updateProps);
+            OpacityPicker.addEventListener('input', updateProps);
+        </script>
+    </body>
+</html>
